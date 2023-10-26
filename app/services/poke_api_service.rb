@@ -13,16 +13,17 @@ class PokeApiService
     response.parsed_response['results']
   end
 
-  def self.feed_pokemon(pokemon_level)
-    # Implement logic to increment the Pokemon's level based on the evolution requirements
+  def self.feed_pokemon(pokemon_level, berries_consumed)
+    # Adjust these thresholds based on your specific requirements
+    evolution_thresholds = [5, 10, 15, 20, 25, 30]
 
-    # For simplicity, let's assume each feeding increments the level by 1
-    new_level = pokemon_level + 1
+    # Calculate the effective level based on the number of thresholds crossed
+    effective_level = evolution_thresholds.count { |threshold| berries_consumed >= threshold } + 1
 
-    # You may need to implement additional logic based on your actual evolution requirements
-    # For example, update the Pokemon's level in your database or send a PATCH request to the API
-    # response = patch("/pokemon/#{pokemon_id}", body: { level: new_level }.to_json, headers: { 'Content-Type' => 'application/json' })
+    # Ensure the effective level doesn't exceed the maximum level (60 in this example)
+    new_level = [effective_level, 60].min
 
     new_level
   end
+
 end
