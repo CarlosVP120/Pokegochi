@@ -8,9 +8,6 @@ class PokemonController < ApplicationController
     @pokemon_level = session[:pokemon_level] || 1
     @berries = PokeApiService.get_berries
     @berries_consumed = session[:berries_consumed] || 0
-
-    # Get the Pokemon's level from the session
-    puts "Pokemon level: #{session[:pokemon_level]}"
   end
 
   def feed
