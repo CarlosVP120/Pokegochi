@@ -1,7 +1,12 @@
 <!-- app/views/pokemon/index.html.erb -->
 <div class="w-full flex flex-col justify-center items-center">
-<h1 class="text-6xl mb-10 font-bold text-blue-600">Your Pokemon</h1>
-<div class="text-center w-full flex justify-center gap-10">
+
+<div class="titlePoke">
+<h1 class="text-6xl font-bold text-blue-600">Pokegochi</h1>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/770px-Pok%C3%A9_Ball_icon.svg.png" alt="pokemon logo" class="w-32 h-32">
+</div>
+<div class="containPoke">
+   <%= image_tag @pokemon_data['sprites']['front_default'], class: "w-64 h-64" %>
   <div class="gap-3 flex flex-col">
   <p class="bg-yellow-300 rounded-xl p-3"><strong>Name:</strong> <%= @pokemon_data['name'] %></p>
   <p class="bg-yellow-300 rounded-xl p-3"><strong>Height:</strong> <%= @pokemon_data['height'] %></p>
@@ -10,7 +15,6 @@
   <p class="bg-yellow-300 rounded-xl p-3"><strong>Berries Consumed:</strong> <%= @berries_consumed %></p>
   <p class="bg-yellow-300 rounded-xl p-3"><strong>Evolution Status:</strong> <%= "Evolved to level #{@pokemon_level}" %></p>
 
-  <%= image_tag @pokemon_data['sprites']['front_default'], class: "w-64 h-64" %>
 
    <%= button_to 'Get New Pokemon', new_pokemon_path, method: :post, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
   <%= button_to 'Reset Stats', reset_stats_path, method: :post, class: "bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
@@ -31,3 +35,33 @@
  
 </div>
 </div>
+
+<%# Image style %>
+<style>
+  body {
+    background-image: url("https://images.unsplash.com/photo-1517245386807-9b4d0dd9c9e2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9rZWdhYmxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .titlePoke {
+    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+  }
+
+  .containPoke {
+    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: between;
+  }
+</style>
