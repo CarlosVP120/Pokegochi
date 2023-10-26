@@ -1,5 +1,6 @@
+# config/routes.rb
 Rails.application.routes.draw do
-  root "home#index"
-
-  get "/home", to: "home#index"
+  get 'pokemon/index'
+  post 'pokemon/feed', to: 'pokemon#feed', as: 'feed_pokemon'
+  root 'pokemon#index'
 end

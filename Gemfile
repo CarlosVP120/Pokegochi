@@ -73,3 +73,7 @@ end
 group :development do
   gem "rails_live_reload"
 end
+
+gem 'poke-api-v2'
+
+gem 'httparty'
