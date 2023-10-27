@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_26_035644) do
-  create_table "pokemons", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2023_10_27_035115) do
+  create_table "berries", force: :cascade do |t|
     t.string "name"
-    t.string "pokeId"
-    t.string "health"
-    t.integer "level"
-    t.float "experience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pokemon_id"
+    t.index ["pokemon_id"], name: "index_berries_on_pokemon_id"
   end
 
+  create_table "pokemons", force: :cascade do |t|
+    t.string "name"
+    t.float "height"
+    t.float "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "level"
+  end
+
+  add_foreign_key "berries", "pokemons"
 end
