@@ -1,39 +1,49 @@
 <!-- app/views/pokemon/index.html.erb -->
-<div class="w-full flex flex-col justify-center items-center">
+<div class="w-full h-full flex flex-col items-center font-mono">
 
-<div class="titlePoke">
-<h1 class="text-6xl font-bold text-blue-600">Pokegochi</h1>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/770px-Pok%C3%A9_Ball_icon.svg.png" alt="pokemon logo" class="w-32 h-32">
-</div>
-<div class="containPoke">
-   <%= image_tag @pokemon_data['sprites']['front_default'], class: "w-64 h-64" %>
-  <div class="gap-3 flex flex-col">
-  <p class="bg-yellow-300 rounded-xl p-3"><strong>Name:</strong> <%= @pokemon_data['name'] %></p>
-  <p class="bg-yellow-300 rounded-xl p-3"><strong>Height:</strong> <%= @pokemon_data['height'] %></p>
-  <p class="bg-yellow-300 rounded-xl p-3"><strong>Weight:</strong> <%= @pokemon_data['weight'] %></p>
-  <p class="bg-yellow-300 rounded-xl p-3"><strong>Level:</strong> <%= @pokemon_level %></p>
-  <p class="bg-yellow-300 rounded-xl p-3"><strong>Berries Consumed:</strong> <%= @berries_consumed %></p>
-  <p class="bg-yellow-300 rounded-xl p-3"><strong>Evolution Status:</strong> <%= "Evolved to level #{@pokemon_level}" %></p>
-
-
-   <%= button_to 'Get New Pokemon', new_pokemon_path, method: :post, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-  <%= button_to 'Reset Stats', reset_stats_path, method: :post, class: "bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-
+  <div class="titlePoke">
+    <img class="pokemonName" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" alt="pokemon logo">
+    <!-- Word breeder -->
+    <h1 class="text-2xl font-bold h-full flex text-center items-end text-white italic">Breeder</h1>
+    <img class="pokeBall" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/770px-Pok%C3%A9_Ball_icon.svg.png" alt="pokemon logo">
   </div>
-  <div>
-  <h2 class="bg-pink-300 rounded-xl p-3 font-bold mb-3" >Berries</h2>
-  <ul>
-    <% @berries.each do |berry| %>
-      <li class="flex gap-1 mb-2 justify-center items-center">
-        <h2 class="bg-purple-300 rounded-xl px-2 py-1"><%= berry['name'] %></h2>
-        <%= button_to 'Feed', feed_pokemon_path(level: @pokemon_level), method: :post, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-1 rounded-xl" %>
-      </li>
-    <% end %>
-  </ul>
-   </div>
 
+  <div class="containPoke shadow-xl shadow-red-400">
+    <%= image_tag @pokemon_data['sprites']['front_default'], class: "pokemonImage animate-pulse" %>
+    <div class="gap-3 flex flex-col">
+      <!-- Make tha complete word in capital letters -->
+      <p class="bg-yellow-200 rounded-xl p-3 border-[2px] border-[#de9400] text-center w-3/4 mx-auto "><strong class="text-5xl text-red-500"><%= @pokemon_data['name'].capitalize %></strong></p>
+      <p class="bg-yellow-300 rounded-xl p-3 border-[2px] border-[#de9400] text-xl"><strong class="italic underline">Height:</strong><span class="text-red-500 font-bold"> <%= @pokemon_data['height'] %></span> </p>
+      <p class="bg-yellow-300 rounded-xl p-3 border-[2px] border-[#de9400] text-xl"><strong class="italic underline">Weight:</strong><span class="text-red-500 font-bold"> <%= @pokemon_data['weight'] %></span></p>
+      <p class="bg-yellow-300 rounded-xl p-3 border-[2px] border-[#de9400] text-xl"><strong class="italic underline">Level:</strong><span class="text-red-500 font-bold animate-pulse"> <%= @pokemon_level %></span></p>
+      <p class="bg-yellow-300 rounded-xl p-3 border-[2px] border-[#de9400] text-xl"><strong class="italic underline">Berries Consumed:</strong><span class="text-red-500 font-bold"> <%= @berries_consumed %></span></p>
+      <p class="bg-yellow-300 rounded-xl p-3 border-[2px] border-[#de9400] text-xl"><strong class="italic underline">Evolution Status:</strong><span class="text-red-500 font-bold animate-pulse"> <%= "Evolved to level #{@pokemon_level}" %></span></p>
+      <!-- Img of pokeball aside the get new pokemon button -->
+      <div class="flex justify-center items-center">
+        <img class="pokeBallSmall" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/770px-Pok%C3%A9_Ball_icon.svg.png" alt="pokemon logo">
+        <%= button_to 'Get New Pokemon', new_pokemon_path, method: :post, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" %>
+        <img class="pokeBallSmall" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/770px-Pok%C3%A9_Ball_icon.svg.png" alt="pokemon logo">
+      </div>
+      <div class="flex justify-center items-center">
+        <%= button_to 'Reset Stats', reset_stats_path, method: :post, class: "bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" %>
+      </div>
+    </div>
+    <div>
+      <h2 class="bg-pink-500 rounded-xl p-3 font-bold mb-3 text-4xl text-center border-[3px] border-purple-500 text-white w-3/4 mx-auto" >Berries</h2>
+      <ul class="bg-[#f6bd20] p-3 rounded-xl shadow-xl shadow-red-400 border-[3px] border-[#de9400]">
+        <% @berries.each do |berry| %>
+          <li class="flex gap-1 mb-2 justify-between items-center">
  
-</div>
+            <%= image_tag "https://www.serebii.net/itemdex/sprites/#{berry['name']}berry.png", class: "w-10 h-10" %>
+
+            <h2 class="bg-purple-300 rounded-xl px-2 py-1 w-full text-center font-bold border border-white"><%= berry['name'].capitalize %></h2>
+
+            <%= button_to 'Feed', feed_pokemon_path(level: @pokemon_level), method: :post, class: "bg-blue-500 hover:bg-purple-700 text-white font-bold px-4 py-1 rounded-xl border border-[#de9400] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <%# Image style %>
@@ -44,24 +54,57 @@
     background-size: cover;
   }
 
-  img {
-    width: 60px;
-    height: 60px;
+  .pokemonName {
+    width: 400px;
+    height: 150px;
+  }
+
+  .pokeBall {
+    width: 100px;
+    height: 100px;
+  }
+
+  .pokeBallSmall {
+    width: 45px;
+    height: 45px;
   }
 
   .titlePoke {
-    gap: 15px;
+    margin: 60px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 60px 0;
+    padding: 60px;
+    background-color: red;
+    border: 5px solid white;
+    border-radius: 40px;
+    box-shadow: 0 0 0 5px black;
   }
 
   .containPoke {
-    gap: 15px;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 40px;
     display: flex;
     flex-direction: row;
     justify-content: between;
+    align-items: center;
+    background-color: #fff6a4;
+  }
+
+  .pokemonImage {
+    width: 450px;
+    height: 450px;
+    border-radius: 40px;
+    background-color: rgb(255, 88, 88);
+    border: 5px solid white;
+    box-shadow: 0 0 0 5px black;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 </style>
